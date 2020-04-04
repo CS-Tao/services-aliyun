@@ -63,6 +63,7 @@ services:
       - ./caddy/logs/:/var/logs/
     depends_on:
       - portainer
+      - yapi
     networks:
       - portainer-network
       - yapi-network
