@@ -1,0 +1,12 @@
+# enviroment file
+.env
+
+# for ci
+ci
+
+# caddy
+caddy/logs/*
+caddy/ssl/*
+
+# upload folder only
+!.gitkeep

@@ -1,0 +1,82 @@
+version: '3.5'
+
+services:
+  # portainer
+  portainer:
+    image: portainer/portainer
+    container_name: portainer
+    command: --admin-password '${PORTAINER_ADMIN_PASSWD_HASHED}'
+    restart: unless-stopped
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - portainer-v:/data
+    networks:
+      - portainer-network
+
+  # yapi(2 services)
+  yapi:
+    image: mrjin/yapi:latest
+    container_name: yapi
+    environment:
+      - LOG_PATH=/tmp/yapi.log
+      - DB_SERVER=yapi-mongo
+      - DB_PORT=27017
+      - VERSION=${YAPI_VERSION}
+      - DB_NAME=${YAPI_DB_NAME}
+      - HOME=${YAPI_HOME}
+      - ADMIN_EMAIL=${YAPI_ADMIN_EMAIL}
+    restart: always
+    volumes:
+      - ./yapi/log/yapi.log:/home/vendors/log
+    depends_on:
+      - yapi-mongo
+    entrypoint: 'bash /wait-for-it.sh yapi-mongo:27017 -- entrypoint.sh'
+    networks:
+      - yapi-network
+  yapi-mongo:
+    image: mongo
+    container_name: yapi-mongo
+    restart: always
+    volumes:
+      - yapi-mongodb-v:/data/db
+    networks:
+      - yapi-network
+
+  # caddy
+  caddy:
+    image: abiosoft/caddy
+    container_name: caddy
+    environment:
+      ACME_AGREE: 'true'
+      TLS_EMAIL: ${CADDY_TLS_EMAIL}
+      DOMAIN_PORTAINER: ${CADDY_DOMAIN_PORTAINER}
+      DOMAIN_YAPI: ${CADDY_DOMAIN_YAPI}
+    restart: unless-stopped
+    ports:
+      - ${CADDY_PORT}:80
+      - ${CADDY_SSL_PORT}:443
+    volumes:
+      - ./caddy/Caddyfile:/etc/Caddyfile:ro
+      - ./caddy/caddyfile.d/:/etc/caddyfile.d/:ro
+      - ./caddy/ssl/:/root/.caddy/
+      - ./caddy/www/:/srv/:ro
+      - ./caddy/logs/:/var/logs/
+    depends_on:
+      - portainer
+    networks:
+      - portainer-network
+      - yapi-network
+
+volumes:
+  portainer-v:
+    name: portainer-data
+  yapi-mongodb-v:
+    name: yapi-mongodb
+
+networks:
+  default:
+    name: services-ali-network
+  portainer-network:
+    name: portainer-network
+  yapi-network:
+    name: yapi-network
