@@ -15,30 +15,29 @@ services:
 
   # yapi(2 services)
   yapi:
-    image: mrjin/yapi:latest
-    container_name: yapi
+    image: jayfong/yapi:latest
+    container_name: yapi-web
     environment:
-      - LOG_PATH=/tmp/yapi.log
-      - DB_SERVER=yapi-mongo
-      - DB_PORT=27017
-      - VERSION=${YAPI_VERSION}
-      - DB_NAME=${YAPI_DB_NAME}
-      - HOME=${YAPI_HOME}
-      - ADMIN_EMAIL=${YAPI_ADMIN_EMAIL}
-    restart: always
-    volumes:
-      - ./yapi/log/yapi.log:/home/vendors/log
+      - YAPI_CLOSE_REGISTER=true
+      - YAPI_DB_SERVERNAME=yapi-mongo
+      - YAPI_DB_PORT=27017
+      - YAPI_MAIL_ENABLE=false
+      - YAPI_LDAP_LOGIN_ENABLE=false
+      - YAPI_PLUGINS=[]
+      - YAPI_ADMIN_ACCOUNT=${YAPI_ADMIN_EMAIL}
+      - YAPI_ADMIN_PASSWORD=${YAPI_ADMIN_PASSWD}
+      - YAPI_DB_DATABASE=${YAPI_DB_NAME}
+    restart: unless-stopped
     depends_on:
       - yapi-mongo
-    entrypoint: 'bash /wait-for-it.sh yapi-mongo:27017 -- entrypoint.sh'
     networks:
       - yapi-network
   yapi-mongo:
-    image: mongo
+    image: mongo:latest
     container_name: yapi-mongo
-    restart: always
     volumes:
       - yapi-mongodb-v:/data/db
+    restart: unless-stopped
     networks:
       - yapi-network
 
