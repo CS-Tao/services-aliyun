@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentScriptType="application/ecmascript" contentStyleType="text/css" height="188px" preserveAspectRatio="none" style="width:292px;height:188px;" version="1.1" viewBox="0 0 292 188" width="292px" zoomAndPan="magnify"><defs><filter height="300%" id="fqqfltl7tgwks" width="300%" x="-1" y="-1"><feGaussianBlur result="blurOut" stdDeviation="2.0"/><feColorMatrix in="blurOut" result="blurOut2" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .4 0"/><feOffset dx="4.0" dy="4.0" in="blurOut2" result="blurOut3"/><feBlend in="SourceGraphic" in2="blurOut3" mode="normal"/></filter></defs><g><!--MD5=[b14aa3529a60505823c7fa67d4fbe949]
+entity caddy--><rect fill="#FEFECE" filter="url(#fqqfltl7tgwks)" height="46.2969" style="stroke: #A80036; stroke-width: 1.5;" width="81" x="16.5" y="8"/><rect fill="#FEFECE" height="10" style="stroke: #A80036; stroke-width: 1.5;" width="15" x="77.5" y="13"/><rect fill="#FEFECE" height="2" style="stroke: #A80036; stroke-width: 1.5;" width="4" x="75.5" y="15"/><rect fill="#FEFECE" height="2" style="stroke: #A80036; stroke-width: 1.5;" width="4" x="75.5" y="19"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="41" x="31.5" y="40.9951">caddy</text><!--MD5=[43030a5e48a55402ac9ddc0b9f97953f]
+entity portainer--><rect fill="#FEFECE" filter="url(#fqqfltl7tgwks)" height="46.2969" style="stroke: #A80036; stroke-width: 1.5;" width="102" x="6" y="131"/><rect fill="#FEFECE" height="10" style="stroke: #A80036; stroke-width: 1.5;" width="15" x="88" y="136"/><rect fill="#FEFECE" height="2" style="stroke: #A80036; stroke-width: 1.5;" width="4" x="86" y="138"/><rect fill="#FEFECE" height="2" style="stroke: #A80036; stroke-width: 1.5;" width="4" x="86" y="142"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="62" x="21" y="163.9951">portainer</text><!--MD5=[4c9ba0c5f39c7966e2bc3d11d47e885f]
+entity yapi--><rect fill="#FEFECE" filter="url(#fqqfltl7tgwks)" height="46.2969" style="stroke: #A80036; stroke-width: 1.5;" width="67" x="170.5" y="8"/><rect fill="#FEFECE" height="10" style="stroke: #A80036; stroke-width: 1.5;" width="15" x="217.5" y="13"/><rect fill="#FEFECE" height="2" style="stroke: #A80036; stroke-width: 1.5;" width="4" x="215.5" y="15"/><rect fill="#FEFECE" height="2" style="stroke: #A80036; stroke-width: 1.5;" width="4" x="215.5" y="19"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="27" x="185.5" y="40.9951">yapi</text><!--MD5=[54f53d6eaf65ee0ce99f989fbd43ab97]
+entity yapi-mongo--><rect fill="#FEFECE" filter="url(#fqqfltl7tgwks)" height="46.2969" style="stroke: #A80036; stroke-width: 1.5;" width="121" x="143.5" y="131"/><rect fill="#FEFECE" height="10" style="stroke: #A80036; stroke-width: 1.5;" width="15" x="244.5" y="136"/><rect fill="#FEFECE" height="2" style="stroke: #A80036; stroke-width: 1.5;" width="4" x="242.5" y="138"/><rect fill="#FEFECE" height="2" style="stroke: #A80036; stroke-width: 1.5;" width="4" x="242.5" y="142"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="81" x="158.5" y="163.9951">yapi-mongo</text><!--MD5=[5a72d451b02aee77c78d3b7225f9f0db]
+link caddy to portainer--><path d="M57,54.1354 C57,74.4937 57,104.1907 57,125.908 " fill="none" id="caddy-&gt;portainer" style="stroke: #A80036; stroke-width: 1.0; stroke-dasharray: 7.0,7.0;"/><polygon fill="#A80036" points="57,130.9684,61,121.9684,57,125.9684,53,121.9684,57,130.9684" style="stroke: #A80036; stroke-width: 1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="75" x="58" y="97.0669">depends on</text><!--MD5=[a2631a2243a0b05efccba592485d73f8]
+link yapi to yapi-mongo--><path d="M204,54.1354 C204,74.4937 204,104.1907 204,125.908 " fill="none" id="yapi-&gt;yapi-mongo" style="stroke: #A80036; stroke-width: 1.0; stroke-dasharray: 7.0,7.0;"/><polygon fill="#A80036" points="204,130.9684,208,121.9684,204,125.9684,200,121.9684,204,130.9684" style="stroke: #A80036; stroke-width: 1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="75" x="205" y="97.0669">depends on</text><!--MD5=[f8e2bfd722b9c449f577c2a1aad42a26]
+@startuml
+skinparam componentStyle uml2
+[caddy]
+[portainer]
+[yapi]
+[yapi-mongo]
+[caddy] ..> [portainer] : depends on
+[yapi] ..> [yapi-mongo] : depends on
+
+@enduml
+
+PlantUML version 1.2019.11(Sun Sep 22 10:02:15 GMT 2019)
+(GPL source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Java Version: 14-ea+15
+Operating System: Linux
+Default Encoding: UTF-8
+Language: en
+Country: US
+--></g></svg>
