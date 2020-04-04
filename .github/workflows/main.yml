@@ -25,7 +25,7 @@ jobs:
           cat docker-compose.yml | docker run -i funkwerk/compose_plantuml --link-graph | docker run -i think/plantuml > ci/services_graph.svg
       - name: Deploy compose graph
         uses: peaceiris/actions-gh-pages@v3
-        env:
+        with:
           deploy_key: ${{ secrets.ACTIONS_DEPLOY_KEY }}
           publish_branch: gh-pages
           publish_dir: ./ci
