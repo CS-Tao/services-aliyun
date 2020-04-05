@@ -43,7 +43,7 @@ services:
 
   # caddy
   caddy:
-    image: abiosoft/caddy
+    image: hectormolinero/caddy:latest
     container_name: caddy
     environment:
       ACME_AGREE: 'true'
