@@ -58,7 +58,7 @@ services:
       - ${CADDY_SSL_PORT}:443
     volumes:
       - ./caddy/Caddyfile:/etc/Caddyfile:ro
-      - ./caddy/Caddyfile.d/:/etc/caddyfile.d/:ro
+      - ./caddy/Caddyfile.d/:/etc/Caddyfile.d/:ro
       - ./caddy/ssl/:/root/.caddy/
       - ./caddy/www/:/srv/:ro
       - ./caddy/logs/:/var/logs/
