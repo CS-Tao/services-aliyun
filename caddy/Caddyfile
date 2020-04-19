@@ -1,2 +1,1 @@
-
-import ./caddyfile.d/*
+import ./Caddyfile.d/*
